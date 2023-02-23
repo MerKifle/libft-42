@@ -26,25 +26,25 @@ M_OBJS = $(MANDATORY_SRCS:.c=.o)
 B_OBJS = $(BONUS_SRCS:.c=.o)
 
 LIBCR   = ar -rc
-CC      = gcc
+CC      = cc
 RM      = rm -f
 CFLAGS  = -Wall -Wextra -Werror 
 
 all: $(NAME)
 
 .c.o: 
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) 
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) 
 
 $(NAME): $(M_OBJS)
 	$(LIBCR) $(NAME) $(M_OBJS)
 	
 clean:
-	$(RM) $(M_OBJS) $(B_OBJS)
+	@$(RM) $(M_OBJS) $(B_OBJS)
 
 fclean: clean
-		$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean  all
 
-bonus: $(M_OBJS) $(B_OBJS)
-	$(LIBCR) $(NAME) $(M_OBJS) $(B_OBJS)
+bonus: $(B_OBJS)
+	$(LIBCR) $(NAME) $(B_OBJS)
